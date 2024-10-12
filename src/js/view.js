@@ -12,6 +12,10 @@ class View {
   addHandlerTheme() {
     themeBtn.addEventListener("click", () => {
       document.body.classList.toggle("dark");
+
+      if (document.body.classList.contains("dark"))
+        themeBtn.src = "src/images/icon-sun.svg";
+      else themeBtn.src = "src/images/icon-moon.svg";
     });
   }
 }
@@ -50,7 +54,8 @@ class List {
           <div class="task ${checked ? "completed-task" : ""}" id="${id}">
             <input type="checkbox" ${checked ? "checked" : ""}>
             <p class="content">${content}</p>
-            <p class="remove">x</p>
+            <img  class="remove" src="src/images/icon-cross.svg" alt="">
+
           </div>
     `;
 
@@ -100,21 +105,6 @@ class List {
     });
   }
 
-  addHandlerFocusTask() {
-    todoList.addEventListener("click", (e) => {
-      const task = e.target.closest(".task");
-
-      // reset any active task
-      this._tasks.forEach((task) => task.classList.remove("active"));
-
-      // guard class
-      if (!task) return;
-
-      // assign new active task
-      task.classList.add("active");
-    });
-  }
-
   addHandlerMarkComplete(handler) {
     todoList.addEventListener("click", (e) => {
       const target = e.target.closest(`input[type="checkbox"]`);
@@ -157,12 +147,15 @@ class List {
     });
   }
 
-  addHandlerClearComplete() {
+  addHandlerClearComplete(handler) {
     clearBtn.addEventListener("click", () => {
       const removed = this._tasks.filter((task) =>
         task.classList.contains("completed-task")
       );
-      removed.forEach((task) => this._removeTask(task));
+      removed.reverse().forEach((task) => this._removeTask(task.id));
+      // update local storage
+      this._updateLocal();
+      handler(this._localTasks);
     });
   }
 
@@ -185,7 +178,8 @@ class List {
   restoreLocal(handler) {
     window.addEventListener("load", () => {
       this._localTasks = handler();
-      this._localTasks.forEach((task) => this._addNew(task, true));
+      // reversed to keep the original order
+      this._localTasks.reverse().forEach((task) => this._addNew(task, true));
     });
   }
 }

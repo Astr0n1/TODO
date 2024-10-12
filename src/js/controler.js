@@ -17,8 +17,7 @@ const init = function () {
   todo.addHandlerNewTask(updateLocalStorage);
   todo.addHandlerRemoveTask(updateLocalStorage);
   todo.addHandlerMarkComplete(updateLocalStorage);
-  todo.addHandlerClearComplete();
-  todo.addHandlerFocusTask();
+  todo.addHandlerClearComplete(updateLocalStorage);
   todo.addHandlerFilter();
 };
 
