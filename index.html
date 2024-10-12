@@ -24,57 +24,51 @@
   <body>
 
     <div class="hero"></div>
+
     <div class="container">
-      <div class="heading">
-        <h1>Todo</h1>
-
-        <img src="src/images/icon-moon.svg" alt class="theme">
+      <div class="head">
+        <h1>todo</h1>
+        <img src="src/images/icon-moon.svg" alt="theme" class="theme">
       </div>
 
-      <div class="create">
-        <form action class="task">
-          <input type="checkbox" class="create__check-box ">
-          <input type="text" class="create__input"
-            placeholder="Create a new todo . . .">
-        </form>
-      </div>
+      <form class="create">
+        <input type="checkbox" class="create__checkbox">
+        <input type="text" class="create__input"
+          placeholder="Create a new todo . . .">
+      </form>
 
-      <div class="todo-list">
-        <div class="list ">
+      <div class="page">
 
-          <!-- <div class="task completed-task" id="1">
-            <input type="checkbox" checked>
-            <p class="content">Jog around the park</p>
-            <img class="remove" src="src/images/icon-cross.svg" alt>
-          </div>
+        <ul class="list">
+          <li class="task completed" draggable="true">
+            <input type="checkbox" class="task__checkbox " checked>
+            <p class="task__content">Complete task 1</p>
+            <img src="src/images/icon-cross.svg" alt class="remove">
 
-          <div class="task" id="2">
-            <input type="checkbox">
-            <p class="content">Jog around the park</p>
-            <img class="remove" src="src/images/icon-cross.svg" alt>
-          </div> -->
+          </li>
 
+          <li class="task " draggable="true">
+            <input type="checkbox" class="task__checkbox ">
+            <p class="task__content">Complete task 1</p>
+            <img src="src/images/icon-cross.svg" alt class="remove">
+          </li>
+
+        </ul>
+
+        <div class="tail">
+          <p><span class="left">1</span> items left</p>
+          <a class="clear">Clear Completed</a>
         </div>
 
-        <div class="controler">
-          <p><span class="items-left">1</span> items left</p>
-          <ul class="filter">
-            <li class="all current">All</li>
-            <li class="active">Active</li>
-            <li class="completed">Completed</li>
-          </ul>
-          <p class="clear">Clear Completed</p>
+        <div class="control">
+          <a class="all current">all</a>
+          <a class="active">active</a>
+          <a class="completed">completed</a>
         </div>
       </div>
-
-      <!-- <p class="hint">Drag and drop to reorder list</p> -->
 
     </div>
 
-    <div class="attribution">
-      Challenge by <a href="https://www.frontendmentor.io?ref=challenge"
-        target="_blank">Frontend Mentor</a>.
-      Coded by <a href="https://github.com/Astr0n1">Ayman Hussein</a>.
-    </div>
+    <p class="drag-drop">Drag and drop to reorder list</p>
   </body>
 </html>

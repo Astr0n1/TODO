@@ -29,268 +29,279 @@
 }
 
 body {
-  margin: 0px;
-  align-items: center;
   font-family: var(--font-family);
+}
+
+body.dark {
+  background-color: var(--dark-color1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-/* light theme */
-body,
-.create,
-.todo-list,
-.task p {
-  background-color: var(--light-color1);
-  color: var(--light-color5);
-}
-
-input[type="text"] {
-  background-color: unset;
-  caret-color: var(--primary-color);
-  caret-shape: block;
-}
-
-h1 {
-  color: var(--light-color1) !important;
-}
-
-input::placeholder {
-  color: var(--dark-color2);
-}
-
-input[type="checkbox"] {
-  border: 1px solid var(--light-color3);
-}
-
-input[type="checkbox"]:checked + p {
-  color: var(--light-color3);
-}
-
-.task:hover p.remove {
-  color: var(--light-color5);
-}
-
-.controler {
-  color: var(--light-color4);
-  background-color: var(--light-color1);
-}
-
-.filter *:not(.current):hover,
-.clear:hover {
-  color: var(--light-color5);
-}
-
-.current {
-  color: var(--primary-color);
-}
-
-/* dark theme */
-body.dark,
-.dark .create,
-.dark .todo-list,
-.dark .task p {
-  background-color: var(--dark-color2);
-  color: var(--dark-color3);
-}
-
-.dark input[type="text"] {
-  color: var(--dark-color3);
-}
-.dark input::placeholder {
-  color: var(--dark-color4);
-}
-
-.dark .task:hover p.remove {
-  color: var(--dark-color5);
-}
-
-input[type="checkbox"] {
-  border: 1px solid var(--dark-color6);
-}
-
-.dark input[type="checkbox"]:checked + p {
-  color: var(--dark-color6);
-}
-
-.dark .task {
-  border-bottom: 1px solid var(--light-color5);
-}
-
-.dark .controler {
-  border-top: 1px solid var(--light-color5);
-  background-color: var(--dark-color2);
-}
-
-/* main blocks */
-
+/* ------- main components-------- */
 .hero {
   position: absolute;
-  top: 0;
   z-index: -1;
-  width: 100%;
-  height: 40%;
-  min-height: 350px;
-  max-height: 650px;
+  top: 0;
+  /* background-color: rebeccapurple; */
   background-image: url(../images/bg-desktop-light.jpg);
-  background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
+  width: 100%;
+  height: 40vw;
+  min-height: 350px;
+  max-height: 600px;
 }
 
 .dark .hero {
   background-image: url(../images/bg-desktop-dark.jpg);
 }
 
-.heading {
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-width: 600px;
+  width: 60vw;
+  max-width: 800px;
+  margin: 100px auto;
+}
+.head,
+.create,
+.page,
+.list,
+.tail {
+  width: 100%;
+}
+
+.head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  margin: 100px auto 0;
-  width: 700px;
+  margin: 50px;
 }
 
 .create {
-  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  height: 80px;
   border-radius: 8px;
+  background-color: var(--light-color1);
 }
 
-.todo-list {
+.dark .create {
+  background-color: var(--dark-color1);
+}
+
+.create__input,
+.list li p {
+  width: 85%;
+  height: 100%;
+  font-size: 2rem;
+  border-radius: 8px;
+  outline: unset;
+  border: unset;
+  background-color: unset;
+}
+
+.page {
   position: relative;
   border-radius: 8px;
-  box-shadow: 0 0 20px 5px rgb(0, 0, 0, 0.2);
+  background-color: var(--light-color1);
+  box-shadow: 0 0 15px 5px rgb(0, 0, 0, 0.1);
+}
+
+.dark .page {
+  background-color: var(--dark-color1);
 }
 
 .list {
-  max-height: 100%;
-  max-height: 400px;
-  overflow-y: scroll;
-  scrollbar-width: none;
-}
-
-.task {
-  height: 80px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid var(--dark-color3);
-  gap: 20px;
-}
-
-.controler {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 80px;
-  max-height: 80px;
-  border-top: 1px solid var(--dark-color3);
-}
-
-.controler ul {
-  display: flex;
   list-style: none;
-  gap: 15px;
+  max-height: 480px;
+  overflow-y: hidden;
+  scrollbar-width: 0;
 }
 
-/* smaller cmoponents  */
+.list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  color: var(--light-color5);
+  border-bottom: 1px solid var(--light-color2);
+}
 
-.theme {
-  /* scale: 1.7; */
-  margin-right: 30px;
+.dark .list li {
+  color: var(--dark-color4);
+}
+
+.dark .list li {
+  border-bottom: 1px solid var(--dark-color2);
+}
+
+.list li p {
+  display: flex;
+  align-items: center;
+}
+
+.tail {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
+  color: var(--light-color4);
+}
+
+.dark .tail {
+  color: var(--dark-color5);
+}
+
+.control {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 30px;
+  text-transform: capitalize;
+  color: var(--light-color4);
+}
+
+.dark .control {
+  color: var(--dark-color5);
+}
+
+a {
   cursor: pointer;
 }
-.theme .create input {
-  border: unset;
-  caret-color: var(--primary-color);
-  border-radius: 8px;
-  text-transform: unset !important;
+
+a.current {
+  color: var(--primary-color);
 }
+
+a:not(.current):hover {
+  color: var(--light-color5);
+}
+
+.dark a:not(.current):hover {
+  color: var(--dark-color3);
+}
+
+p.drag-drop {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/*  */
 
 h1 {
   text-transform: uppercase;
-  letter-spacing: 10px;
-  font-size: 2.6rem;
+  letter-spacing: 3px;
+  font-size: 2.5rem;
+  color: var(--light-color1);
 }
 
-.task p,
-input[type="text"] {
-  display: flex;
-  align-items: center;
-  font-size: 1.5rem;
-  font-weight: 400;
-  text-transform: capitalize;
-  width: 100%;
-  margin: 0;
+input {
+  caret-color: var(--primary-color);
+  color: var(--light-color5);
 }
 
-input[type="text"] {
-  outline: unset;
-  border: unset;
-}
-img.remove {
-  display: none;
+.dark input {
+  color: var(--dark-color4);
 }
 
-.task:hover img.remove {
-  display: inline-block;
-  position: absolute;
-  cursor: pointer;
-  right: 0;
-  transform: translateX(-30px);
+input::placeholder {
+  color: var(--light-color3);
 }
 
-.filter *,
-.clear {
-  cursor: pointer;
-}
-
-input[type="text"] {
-  height: 100%;
-}
-input[type="text"]:focus {
-  outline: unset;
-  border: unset;
+.dark input::placeholder {
+  color: var(--dark-color7);
 }
 
 input[type="checkbox"] {
   position: relative;
-  appearance: none; /* Removes default checkbox */
+  appearance: none;
   -webkit-appearance: none;
   width: 30px;
   height: 30px;
-  margin-left: 30px;
-  border-radius: 50%;
   background-color: unset;
+  border: 1px solid var(--light-color2);
+  border-radius: 50%;
   cursor: pointer;
+  outline: none;
+  margin-left: 25px;
+}
+
+.dark input[type="checkbox"] {
+  border: 1px solid var(--dark-color2);
 }
 
 input[type="checkbox"]:checked {
+  position: relative;
   background-image: var(--primary-gradient);
 }
 
 input[type="checkbox"]:checked::after {
   position: absolute;
-  /* top: 50%;
-  left: 50%; */
-  transform: translate(15%, 25%);
   content: "";
+  background-image: url(../images/icon-check.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 60%;
   width: 100%;
   height: 100%;
-  background-image: url(../images/icon-check.svg);
-  background-repeat: no-repeat;
-  background-size: 70%;
 }
 
 input[type="checkbox"]:checked + p {
   text-decoration: line-through;
+  color: var(--light-color3);
 }
 
-.attribution {
+.dark input[type="checkbox"]:checked + p {
+  color: var(--dark-color7);
+}
+
+.task:not(.completed):hover input[type="checkbox"]::after {
+  content: "";
   position: absolute;
-  bottom: 100px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: -10%;
+  top: -10%;
+  width: 120%;
+  height: 120%;
+  border-radius: 50%;
+  background-image: var(--primary-gradient);
+}
+
+.task:not(.completed):hover input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--light-color1);
+}
+
+.dark .task:not(.completed):hover input[type="checkbox"]::before {
+  background-color: var(--dark-color1);
+}
+
+.remove {
+  display: none;
+  position: absolute;
+  right: 30px;
+}
+
+.task:hover .remove {
+  display: block;
 }
