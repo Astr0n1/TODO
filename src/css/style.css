@@ -43,11 +43,13 @@ body.dark {
 }
 
 /* ------- main components-------- */
+.theme {
+  cursor: pointer;
+}
 .hero {
   position: absolute;
   z-index: -1;
   top: 0;
-  /* background-color: rebeccapurple; */
   background-image: url(../images/bg-desktop-light.jpg);
   background-position: center;
   background-size: cover;
@@ -125,8 +127,9 @@ body.dark {
 .list {
   list-style: none;
   max-height: 480px;
-  overflow-y: hidden;
-  scrollbar-width: 0;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .list li {
@@ -299,6 +302,7 @@ input[type="checkbox"]:checked + p {
 .remove {
   display: none;
   position: absolute;
+  cursor: pointer;
   right: 30px;
 }
 
