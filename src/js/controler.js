@@ -78,16 +78,22 @@ const clear = function () {
   listDOM.innerHTML = "";
 };
 
-const addNewTask = function () {
-  const checked = formChecked.checked;
-  const content = formContent.value;
+const addNewTask = function (task, parse = false) {
+  let checked, content;
+  if (parse) {
+    checked = task.checked;
+    content = task.content;
+  } else {
+    checked = formChecked.checked;
+    content = formContent.value;
 
-  // guard class
-  if (!content) return;
+    // guard class
+    if (!content) return;
 
-  // reset inpur
-  formChecked.checked = false;
-  formContent.value = "";
+    // reset inpur
+    formChecked.checked = false;
+    formContent.value = "";
+  }
 
   // generate the task in dom
   const markup = `
@@ -98,8 +104,11 @@ const addNewTask = function () {
             <img src="src/images/icon-cross.svg" alt class="remove">
           </li>
   `;
-  listDOM.insertAdjacentHTML("afterbegin", markup);
-  updateArray();
+  const fragment = document.createRange().createContextualFragment(markup);
+  const element = fragment.firstElementChild;
+  listDOM.insertAdjacentElement("afterbegin", element);
+
+  tasks.unshift(element);
   filterList();
 };
 
@@ -112,12 +121,6 @@ const removeTask = function (task) {
 
 const renderTask = function (task) {
   listDOM.insertAdjacentElement("afterbegin", task);
-};
-
-const updateArray = function () {
-  tasks = [];
-  let data = Array.from(listDOM.querySelectorAll(".task"));
-  if (Array.isArray(data)) tasks = data;
 };
 
 const updateListDOM = function () {
@@ -142,8 +145,35 @@ const filterList = function () {
   });
   tasks.reverse();
   taskNumber.textContent = tasksNum;
+  storeLocal(tasks);
+};
+
+const storeLocal = function (data) {
+  // transform element array  to obbject array
+  let dataObject = [];
+  data.forEach((item) =>
+    dataObject.push({
+      checked: item.classList.contains("completed"),
+      content: item.querySelector(".task__content").textContent,
+    })
+  );
+
+  localStorage.setItem("taskList", JSON.stringify(dataObject));
+};
+
+const restoreLocal = function () {
+  const data = JSON.parse(localStorage.getItem("taskList"));
+  console.log(data);
+
+  data.reverse().forEach((task) => addNewTask(task, true));
 };
 
 // initializing the app
-clear();
-filterList();
+
+const init = function () {
+  restoreLocal();
+  clear();
+  filterList();
+};
+
+init();
